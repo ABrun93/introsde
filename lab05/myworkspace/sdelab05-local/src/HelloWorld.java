@@ -31,7 +31,8 @@ public class HelloWorld extends HttpServlet
 	private static final long serialVersionUID = 1L;
 
 	private static enum Languages 
-	{   italian("it", "Ciao Mondo!"),
+	{   
+		italian("it", "Ciao Mondo!"),
         english("en", "Hello World!"),
         spanish("es", "Hola Mundo!");
 		
