@@ -14,14 +14,14 @@
   ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
   ~ KIND, either express or implied. See the License for the
   ~ specific language governing permissions and limitations
-  ~ under the License.
+  ~ under System.out.println(the License.
   -->
 
 <project name="quickstart" basedir="." default="generate.service">
 
     <property environment="env"/>
     <!-- Remember, update the following to fit your filesystem --> 
-    <property name="AXIS2_HOME" value="/opt/axis2-1.7.3"/>
+    <property name="AXIS2_HOME" value="/home/c-3po/Programmi/axis2-1.7.3"/>
     <property name="AXIS2_HOME_TOMCAT" value="/home/c-3po/Programmi/tomcat/webapps/axis2"/>
 
     <property name="build.dir" value="build"/>
