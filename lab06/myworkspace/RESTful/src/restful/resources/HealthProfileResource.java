@@ -5,7 +5,9 @@ import restful.model.HealthProfile;
 import restful.model.Person;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
+import javax.ws.rs.core.UriInfo;
 
 import org.json.simple.JSONArray;
 //import org.json.simple.JSONException;
@@ -32,6 +36,7 @@ public class HealthProfileResource {
     	Person pallino = new Person();
 		Person pallo = new Person(new Long(2), "Pinco","Pallo", "1987-07-21");
 		HealthProfile hp = new HealthProfile(68.0,1.72);
+		hp.setHeight(1.81);
 		Person john = new Person(new Long(3), "John","Doe", "1978-02-15", hp);
 		
 		database.put(pallino.getPersonId(), pallino);
@@ -54,6 +59,7 @@ public class HealthProfileResource {
 			JSONObject hObj=new JSONObject();
 			hObj.put("weight", h.getWeight());
 			hObj.put("height", h.getHeight());
+			hObj.put("lastUpdate", h.getHistory().toString());
 			
 			pObj.put("profile", hObj);
 			
@@ -64,12 +70,7 @@ public class HealthProfileResource {
 		
 		return result.toString();
 	}
-	
-	
-	
-	
-	
-	
+		
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
