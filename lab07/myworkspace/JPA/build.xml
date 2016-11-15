@@ -110,20 +110,11 @@
 
 	<!-- make sure you have created first the WebContent folder, including a META-INF folder, WEB-INF/web.xml file and WEB-INF/lib folder --> 
 	<target name="create.war" depends="compile">
-		<war destfile="sdelab06.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
+		<war destfile="jpa.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
 			<fileset dir="${web.dir}/WebContent">
 				<include name="**/*.*"/>
 			</fileset>
 			<classes dir="${build.dir}"/>
 		</war>
-	</target>
-	
-	<target name="deploy" depends="create.war">
-		<exec excutable="heroku" >
-			<arg value="war:deploy"/>
-			<arg value="${war.file}"/>
-			<arg value="--app"/>
-			<arg value="${heroku.app}"/>
-		</exec>
 	</target>
 </project>

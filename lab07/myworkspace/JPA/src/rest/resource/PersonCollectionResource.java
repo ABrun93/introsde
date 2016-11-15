@@ -1,4 +1,4 @@
-package rest.resources;
+package rest.resource;
 
 import rest.model.Person;
 

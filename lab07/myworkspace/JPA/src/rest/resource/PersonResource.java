@@ -1,4 +1,4 @@
-package rest.resources;
+package rest.resource;
 
 import rest.model.Person;
 
@@ -57,7 +57,7 @@ public class PersonResource {
         Person person = this.getPersonById(id);
         if (person == null)
             throw new RuntimeException("Get: Person with " + id + " not found");
-        System.out.println("Returning person... " + person.getIdPerson());
+        System.out.println("Returning person... " + person.getId());
         return person;
     }
 
@@ -74,7 +74,7 @@ public class PersonResource {
             res = Response.noContent().build();
         } else {
             res = Response.created(uriInfo.getAbsolutePath()).build();
-            person.setIdPerson(this.id);
+            person.setId(this.id);
             Person.updatePerson(person);
         }
         return res;

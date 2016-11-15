@@ -1,45 +1,37 @@
 package rest.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import rest.dao.LifeCoachDao;
 
 @Entity  // indicates that this class is an entity to persist in DB
 @Table(name="Person") // to whate table must be persisted
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
+@XmlRootElement
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id // defines this attributed as the one that identifies the entity
-    @GeneratedValue(strategy=GenerationType.AUTO) 
-    @Column(name="idPerson") // maps the following attribute to a column
-    private int idPerson;
+    @GeneratedValue
+    @Column(name="id") // maps the following attribute to a column
+    private int id;
     @Column(name="lastname")
     private String lastname;
-    @Column(name="name")
-    private String name;
-    @Column(name="username")
-    private String username;
-    @Temporal(TemporalType.DATE) // defines the precision of the date attribute
+    @Column(name="firstname")
+    private String firstname;
     @Column(name="birthdate")
-    private Date birthdate; 
-    @Column(name="email")
-    private String email;
+    private String birthdate; 
     
-    // mappedBy must be equal to the name of the attribute in LifeStatus that maps this relation
- 	@OneToMany(mappedBy="person",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
- 	private List<LifeStatus> lifeStatus;
-    
-    public int getIdPerson() {
-		return idPerson;
+    // add below all the getters and setters of all the private attributes   
+    public int getId() {
+		return id;
 	}
 
-	public void setIdPerson(int idPerson) {
-		this.idPerson = idPerson;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getLastname() {
@@ -50,58 +42,31 @@ public class Person implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public Date getBirthdate() {
+	public String getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	}	
 	
-	// the XmlElementWrapper defines the name of node in which the list of LifeStatus elements
-	// will be inserted
-	@XmlElementWrapper(name = "Measurements")
-	public List<LifeStatus> getLifeStatus() {
-	    return lifeStatus;
-	}
-
-	public void setLifeStatus(List<LifeStatus> param) {
-	    this.lifeStatus = param;
-	}
-	
-	// add below all the getters and setters of all the private attributes
-    public static Person getPersonById(int personId) {
+	// Database operations
+	public static Person getPersonById(int personId) {
         EntityManager em = LifeCoachDao.instance.createEntityManager();
         Person p = em.find(Person.class, personId);
         LifeCoachDao.instance.closeConnections(em);
         return p;
     }
 
-    public static List<Person> getAll() {
+	public static List<Person> getAll() {
         EntityManager em = LifeCoachDao.instance.createEntityManager();
         List<Person> list = em.createNamedQuery("Person.findAll", Person.class)
             .getResultList();
@@ -138,4 +103,5 @@ public class Person implements Serializable {
         tx.commit();
         LifeCoachDao.instance.closeConnections(em);
     }
+    
 }

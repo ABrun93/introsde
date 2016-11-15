@@ -14,7 +14,7 @@ public enum LifeCoachDao {
         if (emf!=null) {
             emf.close();
         }
-        emf = Persistence.createEntityManagerFactory("introsde-jpa");	// Riferimento al persistence
+        emf = Persistence.createEntityManagerFactory("introsde-jpa");
     }
 
     public EntityManager createEntityManager() {
