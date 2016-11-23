@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="introsde-jpa">
+		<class>soap.document.model.HealthMeasureHistory</class>
+		<class>soap.document.model.LifeStatus</class>
+		<class>soap.document.model.MeasureDefaultRange</class>
+		<class>soap.document.model.MeasureDefinition</class>
+		<class>soap.document.model.Person</class>	
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:sqlite:lifecoach.sqlite" />
+			<property name="eclipselink.logging.level" value="ALL" />
+			<!-- The initial value was create-tables -->
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+			<!-- it means that automatic changes will be directly applied to the database
+                 this is not reccommended, but we will use it as example only -->  
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+		</properties>
+	</persistence-unit>
+</persistence>
